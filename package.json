@@ -1,0 +1,40 @@
+{
+  "name": "annotated-gherkin",
+  "version": "0.0.0",
+  "description": "Preprocess gherkin files by filtering out irrelevant steps",
+  "main": "index.js",
+  "bin": {
+    "annotated-gherkin": "./cli.js"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sevcsik/annotated-gherkin.js.git"
+  },
+  "keywords": [
+    "bdd",
+    "gherkin",
+    "gulp",
+    "testing",
+    "node"
+  ],
+  "author": "András Sevcsik-Zajácz <sevcsik@sevdev.hu>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sevcsik/annotated-gherkin.js/issues"
+  },
+  "homepage": "https://github.com/sevcsik/annotated-gherkin.js#readme",
+  "devDependencies": {
+    "gherkin2robot": "0.0.2",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.1"
+  },
+  "dependencies": {
+    "commander": "^2.16.0",
+    "gherkin": "^5.1.0",
+    "lodash": "^4.17.10",
+    "vinyl": "^2.2.0"
+  }
+}
