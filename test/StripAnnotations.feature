@@ -28,9 +28,10 @@ Feature:
 		Given a feature file with content
 		"""
 		Feature: demo feature
-		Scenario:
+		Scenario: demo scenario
 			Given a platform-specific step | platform
 			And a generic step
+			And another generic step
 			When I do an action
 			Then a platform-specific assertion is met | platform
 			And an assertion is met
@@ -39,8 +40,9 @@ Feature:
 		Then the preprocessed feature file's content equals
 		"""
 		Feature: demo feature
-		Scenario:
-			Given a generic step
-			When I do an action
-			Then an assertion is met
+		  Scenario: demo scenario
+		    Given a generic step
+		    Given another generic step
+		    When I do an action
+		    Then an assertion is met
 		"""
