@@ -7,7 +7,7 @@ Feature:
 		Given a feature file with content
 		"""
 		Feature: demo feature
-		Scenario:
+		Scenario: demo scenario
 			Given a generic step
 			And a platform-specific step | platform
 			When I do an action
@@ -18,10 +18,10 @@ Feature:
 		Then the preprocessed feature file's content equals
 		"""
 		Feature: demo feature
-		Scenario:
-			Given a generic step
-			When I do an action
-			Then an assertion is met
+		  Scenario: demo scenario
+		    Given a generic step
+		    When I do an action
+		    Then an assertion is met
 		"""
 
 	Scenario: Annotated steps after "Given" and "Then"
