@@ -1,4 +1,4 @@
-Feature:
+Feature: Drop every annotation
 	As a developer
 	I want to strip irrelevant steps from my gherkin files
 	So that I don't have to write empty step definitions for the sentences I don't implement

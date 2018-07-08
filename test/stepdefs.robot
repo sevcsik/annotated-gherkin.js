@@ -16,6 +16,9 @@ Given a feature file "${file}"
 When I strip every annotation from the given feature file
 	Run  node ../cli.js -o "the preprocessed feature file" "the given feature file"
 
+When I strip every annotation except "${annotation}" from the given feature file
+	Run  node ../cli.js -o "the preprocessed feature file" -k "${annotation}" "the given feature file"
+
 Then the preprocessed feature file's content equals
 	[Arguments]  ${content}
 	Create file  the preprocessed feature file, reference  ${content}
