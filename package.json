@@ -34,6 +34,7 @@
   "dependencies": {
     "commander": "^2.16.0",
     "gherkin": "^5.1.0",
+    "gherkin-assembler": "^2.0.1",
     "lodash": "^4.17.10",
     "vinyl": "^2.2.0"
   }

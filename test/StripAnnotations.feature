@@ -6,6 +6,7 @@ Feature:
 	Scenario: Annotated steps after "And"
 		Given a feature file with content
 		"""
+		Feature: demo feature
 		Scenario:
 			Given a generic step
 			And a platform-specific step | platform
@@ -16,6 +17,7 @@ Feature:
 		When I strip every annotation from the given feature file
 		Then the preprocessed feature file's content equals
 		"""
+		Feature: demo feature
 		Scenario:
 			Given a generic step
 			When I do an action
@@ -25,6 +27,7 @@ Feature:
 	Scenario: Annotated steps after "Given" and "Then"
 		Given a feature file with content
 		"""
+		Feature: demo feature
 		Scenario:
 			Given a platform-specific step | platform
 			And a generic step
@@ -35,6 +38,7 @@ Feature:
 		When I strip every annotation from the given feature file
 		Then the preprocessed feature file's content equals
 		"""
+		Feature: demo feature
 		Scenario:
 			Given a generic step
 			When I do an action
