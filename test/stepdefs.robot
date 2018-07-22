@@ -16,8 +16,11 @@ Given a feature file "${file}"
 When I strip every annotation from the given feature file
 	Run  node ../cli.js -o "the preprocessed feature file" "the given feature file"
 
-When I strip every annotation except "${annotation}" from the given feature file
-	Run  node ../cli.js -o "the preprocessed feature file" -k "${annotation}" "the given feature file"
+When I strip every annotation except ${annotation:[^ ]+} from the given feature file
+	Run  node ../cli.js -o "the preprocessed feature file" -m "${annotation}" "the given feature file"
+
+When I strip every annotation except ${annotation:[^ ]+} or ${annotation2:[^ ]+} from the given feature file
+	Run  node ../cli.js -o "the preprocessed feature file" -m "${annotation},${annotation2}" "the given feature file"
 
 Then the preprocessed feature file's content equals
 	[Arguments]  ${content}

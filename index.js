@@ -69,7 +69,7 @@ const compile = flow(assembler.objectToAST, curry(assembler.format)(__, { compac
 
 module.exports = (gherkinFileContent, options) => flow( parse
                                                       , replaceAndsWithRealKeyword
-                                                      , filterSteps('platform')
+                                                      , filterSteps(options.match)
                                                       , compile
                                                       )(gherkinFileContent)
 

@@ -1,49 +1,53 @@
-Feature: Keep a single annotation
+Feature: Keep multiple annotations
 	As a developer
-	I want to keep relevant steps marked by an annotation in my gherkin files
+	I want to keep relevant steps marked by multiple annotations in my gherkin files
 	So that I can implement my step definitions for them the same way as unannotated steps
 
-	Scenario: Keep unannotated steps and steps for web
+	Scenario: Keep unannotated steps and steps for web or rest
 		Given a feature file with content
 		"""
 		Feature: demo feature
 			Scenario: demo scenario
 				Given a generic step
-				And an irrelevant platform-specific step            | rest
-				And a relevant platform-specific step               | web
+				And a relevant platform-specific step               | rest
+				And another relevant platform-specific step         | web
+				And an irrelevant step                              | other
 				When I perform an action
 				Then I do an irrelevant platform-specific assertion | rest
 				And a relevant platform-specific assertion          | web
 		"""
-		When I strip every annotation except web from the given feature file
+		When I strip every annotation except web or rest from the given feature file
 		Then the preprocessed feature file's content equals
 		"""
 		Feature: demo feature
 		  Scenario: demo scenario
 		    Given a generic step
 		    Given a relevant platform-specific step
+		    Given another relevant platform-specific step
 		    When I perform an action
 		    Then a relevant platform-specific assertion
 		"""
 
-	Scenario: Keep unannotated steps and steps for web with multiple annotations
+	Scenario: Keep unannotated steps and steps for web or rest with multiple annotations
 		Given a feature file with content
 		"""
 		Feature: demo feature
 			Scenario: demo scenario
 				Given a generic step
-				And an irrelevant platform-specific step            | rest
-				And a relevant platform-specific step               | rest, web
+				And a relevant platform-specific step               | rest
+				And another relevant platform-specific step         | other, web
+				And an irrelevant step                              | other
 				When I perform an action
 				And a relevant platform-specific assertion          | web, rest
 		"""
-		When I strip every annotation except web from the given feature file
+		When I strip every annotation except web or rest from the given feature file
 		Then the preprocessed feature file's content equals
 		"""
 		Feature: demo feature
 		  Scenario: demo scenario
 		    Given a generic step
 		    Given a relevant platform-specific step
+		    Given another relevant platform-specific step
 		    When I perform an action
 		    Then a relevant platform-specific assertion
 		"""

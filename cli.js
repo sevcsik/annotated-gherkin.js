@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 const cmd = require('commander')
-const annotatedGherkin = require('.')
 const { readFile, writeFile } = require('fs')
+const { defaultTo, split } = require('lodash/fp')
 const { promisify } = require('util')
 
+const annotatedGherkin = require('.')
 const package = require('./package.json')
 
 cmd
@@ -18,7 +19,8 @@ remain, with the annotation removed.`)
 	.option( '-o, --output <FILE>'
 	       , 'write the Robot Framework version to the given file. Default is the standard output')
 	.option( '-m, --match <TAG>'
-	       , 'specify a tag which should not be dropped from the output gherkin (by default, all annotated sentences are dropped)')
+	       , 'specify comma-separated list of annotations which should not be dropped from the output gherkin (by default, all annotated sentences are dropped)'
+	       , split(','))
 	.parse(process.argv)
 
 const inputFile = cmd.args[0]
@@ -34,7 +36,7 @@ const readFileP = promisify(readFile)
 const writeFileP = promisify(writeFile)
 
 readFileP(inputFile, { encoding: 'utf-8' })
-	.then(gherkin => annotatedGherkin(gherkin, stepdefsPath))
+	.then(gherkin => annotatedGherkin(gherkin, { match: defaultTo([], cmd.match) }))
 	.then(output => outputFile === '-' ? console.log(output) : writeFileP( outputFile
 	                                                                     , output
 	                                                                     , { encoding: 'utf-8' }

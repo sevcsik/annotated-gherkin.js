@@ -18,7 +18,7 @@ gulp.task('copy examples', () =>
 gulp.task('execute robot', [ 'gherkin2robot', 'copy examples' ], done => {
 	exec('robot -N gherkin2robot *.robot', { cwd: 'temp' }, (err, stdout, stderr) => {
 		if (err) {
-			log(stdout)
+			log('Robot framework results:\n' + stdout)
 			done('Some tests have failed.')
 		} else {
 			done()
