@@ -1,6 +1,6 @@
 {
   "name": "annotated-gherkin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Preprocess gherkin files by filtering out irrelevant steps",
   "main": "index.js",
   "bin": {
