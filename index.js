@@ -4,7 +4,7 @@ const { Parser } = require('gherkin')
 const assembler = require('gherkin-assembler')
 const { flow, identity, filter, map, get, negate, extendAll, curry, reduce, __, concat
       , includes, trim, isEmpty, isArray, isNil, split, tail, cond, T, intersection, castArray
-      , stubArray } = require('lodash/fp')
+      , stubArray, trimEnd } = require('lodash/fp')
 
 const override = curry((fn, original) => extendAll([ {}, original, fn(original) ]))
 const parse = content => (new Parser()).parse(content)
@@ -65,11 +65,30 @@ const filterSteps = annotationsToKeep => override(ast => {
 	       }
 })
 
+const removeAnnotations = override(ast => {
+	const log = v => { console.log('VALUE:', v); return v }
+	const removeAnnotationsFromScenario = override(scenario =>
+		({ steps: map( override(step => ({ text: flow( split('|')
+		                                             , get(0)
+		                                             , trimEnd
+		                                             )(step.text)
+		                                 }))
+		             , scenario.steps
+		             )
+		}))
+
+	return { feature: override( feature => ({ children: map(removeAnnotationsFromScenario, feature.children) })
+	                          , ast.feature
+	                          )
+	       }
+})
+
 const compile = flow(assembler.objectToAST, curry(assembler.format)(__, { compact: true }))
 
 module.exports = (gherkinFileContent, options) => flow( parse
                                                       , replaceAndsWithRealKeyword
                                                       , filterSteps(options.match)
+                                                      , removeAnnotations
                                                       , compile
                                                       )(gherkinFileContent)
 

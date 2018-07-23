@@ -13,7 +13,7 @@ Feature: Keep multiple annotations
 				And another relevant platform-specific step         | web
 				And an irrelevant step                              | other
 				When I perform an action
-				Then I do an irrelevant platform-specific assertion | rest
+				Then I do an irrelevant platform-specific assertion | other
 				And a relevant platform-specific assertion          | web
 		"""
 		When I strip every annotation except web or rest from the given feature file
@@ -38,7 +38,7 @@ Feature: Keep multiple annotations
 				And another relevant platform-specific step         | other, web
 				And an irrelevant step                              | other
 				When I perform an action
-				And a relevant platform-specific assertion          | web, rest
+				Then a relevant platform-specific assertion         | web, rest
 		"""
 		When I strip every annotation except web or rest from the given feature file
 		Then the preprocessed feature file's content equals

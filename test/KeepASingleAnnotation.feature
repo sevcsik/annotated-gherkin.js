@@ -35,7 +35,7 @@ Feature: Keep a single annotation
 				And an irrelevant platform-specific step            | rest
 				And a relevant platform-specific step               | rest, web
 				When I perform an action
-				And a relevant platform-specific assertion          | web, rest
+				Then a relevant platform-specific assertion         | web, rest
 		"""
 		When I strip every annotation except web from the given feature file
 		Then the preprocessed feature file's content equals
