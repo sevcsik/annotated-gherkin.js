@@ -7,7 +7,7 @@
     "annotated-gherkin": "./cli.js"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp"
   },
   "repository": {
     "type": "git",
