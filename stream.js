@@ -5,16 +5,18 @@ module.exports = annotatedGherkin => options =>
 	new TransformStream({
 		objectMode: true,
 		transform(vinyl, encoding, callback) {
+			let contents, error
 			try {
-				const contents = new Buffer(annotatedGherkin(vinyl.contents.toString('utf8'), options))
-				const transformedVinyl = new Vinyl({ cwd: vinyl.cwd
-				                                   , base: vinyl.base
-				                                   , path: vinyl.path
-				                                   , contents
-				                                   })
-				callback(null, transformedVinyl)
-			} catch (error) {
-				callback(error)
+				contents = new Buffer(annotatedGherkin(vinyl.contents.toString('utf8'), options))
+			} catch (error_) {
+				error = error_
 			}
+
+			const transformedVinyl = contents && new Vinyl({ cwd: vinyl.cwd
+				                                           , base: vinyl.base
+				                                           , path: vinyl.path
+				                                           , contents
+				                                           })
+			callback(error, transformedVinyl)
 		}
 	})
